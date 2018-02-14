@@ -10,17 +10,19 @@ export default class App extends Component{
                 <div className="row">
                 <form className="col s12">
                     <div className="row">
-                        <div className="input-field col s4">
-                            <input id="first_name" type="text" className="validate"/>
-                            <label for="first_name">First Name</label>
+                        <div className="input-field col s6">
+                            <input id="to_do" type="text" className="validate"/>
+                            <label for="to_do">What to do</label>
                         </div>
 
-                        <div className="input-field col s4">
-                            <input id="last_name" type="text" className="validate"/>
-                            <label for="last_name">Last Name</label>
+                        <div className="input-field col s6">
+                            <input id="due_date" type="text" className="validate"/>
+                            <label for="due_date">Date</label>
                         </div>
-                        <div className="col s4">
-                            <a className="waves-effect waves-light btn-large">Save</a>
+                        <div className="row">
+                            <div className="col s12">
+                                <a className="waves-effect waves-light btn">Save</a>
+                            </div>
                         </div>
                     </div>
                 </form>
