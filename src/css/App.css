@@ -22,8 +22,14 @@
   font-size: large;
 }
 
-.btn{
+.btn {
   width: 100%;
+}
+
+.collection.col.s8 {
+  float: none;
+  margin: 0 auto;
+  padding: 0;
 }
 
 @keyframes App-logo-spin {
