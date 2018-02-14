@@ -14,6 +14,30 @@ class App extends Component{
         this.props.addReminder(this.state.text);
     }
 
+    renderReminder() {
+        const { reminders } = this.props;
+        return (
+            <div className="row">
+                <div className="col s12">
+                    <div className="row">
+                        <ul className="collection col s8">
+                            {
+                                reminders.map(reminder => {
+                                    return (
+                                        <li className="collection-item"
+                                            key={reminder.id}>
+                                            {reminder.text}
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return (
             <div className="App">
@@ -29,7 +53,6 @@ class App extends Component{
                             />
                             <label htmlFor="to_do">What to do</label>
                         </div>
-
                         <div className="input-field col s6">
                             <input id="due_date" type="text" className="validate"/>
                             <label htmlFor="due_date">Date</label>
@@ -43,11 +66,19 @@ class App extends Component{
                         </div>
                     </div>
                 </form>
+                { this.renderReminder() }
                 </div>
             </div>
         );
     }
 }
 
-export default connect(null, { addReminder })(App);
+function mapStateToProps(state) {
+    // console.log('state', state)
+    return {
+        reminders: state
+    }
+}
+
+export default connect(mapStateToProps, { addReminder })(App);
 
