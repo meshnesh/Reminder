@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addReminder } from '../actions';
+import { addReminder, deleteReminder } from '../actions';
+import moment from 'moment';
 
 class App extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            text:''
+            text:'',
+            dueDate: ''
         }
     }
 
     addReminder() {
-        this.props.addReminder(this.state.text);
+        console.log('this.state.dueDate', this.state.dueDate)
+        this.props.addReminder(this.state.text, this.state.dueDate);
+    }
+
+    deleteReminder(id) {
+        this.props.deleteReminder(id);
     }
 
     renderReminder() {
@@ -26,8 +33,16 @@ class App extends Component{
                                     return (
                                         <li className="collection-item"
                                             key={reminder.id}>
-                                            {reminder.text}
+                                            <div className="collection-item">
+                                                {reminder.text} <em>{moment(new Date(reminder.dueDate)).fromNow()}</em>
+                                                <a className="red darken-4 right"
+                                                    onClick={() =>this.deleteReminder(reminder.id) }
+                                                >
+                                                    &#x2715;
+                                                </a>
+                                            </div>
                                         </li>
+                
                                     )
                                 })
                             }
@@ -54,8 +69,9 @@ class App extends Component{
                             <label htmlFor="to_do">What to do</label>
                         </div>
                         <div className="input-field col s6">
-                            <input id="due_date" type="text" className="validate"/>
-                            <label htmlFor="due_date">Date</label>
+                            <input id="due_date" type="datetime-local" className="validate"
+                                onChange={event => this.setState({dueDate: event.target.value})}
+                            />
                         </div>
                         <div className="row">
                             <div className="col s12">
@@ -80,5 +96,5 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { addReminder })(App);
+export default connect(mapStateToProps, { addReminder, deleteReminder })(App);
 
