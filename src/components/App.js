@@ -12,12 +12,12 @@ export default class App extends Component{
                     <div className="row">
                         <div className="input-field col s6">
                             <input id="to_do" type="text" className="validate"/>
-                            <label for="to_do">What to do</label>
+                            <label htmlFor="to_do">What to do</label>
                         </div>
 
                         <div className="input-field col s6">
                             <input id="due_date" type="text" className="validate"/>
-                            <label for="due_date">Date</label>
+                            <label htmlFor="due_date">Date</label>
                         </div>
                         <div className="row">
                             <div className="col s12">
