@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addReminder } from '../actions';
 
-export default class App extends Component{
+class App extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            text:''
+        }
+    }
+
+    addReminder() {
+        this.props.addReminder(this.state.text);
+    }
+
     render() {
         return (
             <div className="App">
@@ -11,7 +24,9 @@ export default class App extends Component{
                 <form className="col s12">
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="to_do" type="text" className="validate"/>
+                            <input id="to_do" type="text" className="validate"
+                                onChange={event => this.setState({text: event.target.value})}
+                            />
                             <label htmlFor="to_do">What to do</label>
                         </div>
 
@@ -21,7 +36,9 @@ export default class App extends Component{
                         </div>
                         <div className="row">
                             <div className="col s12">
-                                <a className="waves-effect waves-light btn">Save</a>
+                                <a className="waves-effect waves-light btn"
+                                    onClick={() => this.addReminder()}
+                                >Save</a>
                             </div>
                         </div>
                     </div>
@@ -31,3 +48,6 @@ export default class App extends Component{
         );
     }
 }
+
+export default connect(null, { addReminder })(App);
+
